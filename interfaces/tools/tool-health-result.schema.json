@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/tool-health-result.schema.json",
+  "title": "Tool Health Result",
+  "type": "object",
+  "required": [
+    "tool_id",
+    "request_id",
+    "state"
+  ],
+  "properties": {
+    "tool_id": {
+      "type": "string"
+    },
+    "request_id": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "DECLARED_NOT_BOUND",
+        "BOUND_UNVERIFIED",
+        "HEALTHY",
+        "DEGRADED",
+        "UNAVAILABLE"
+      ]
+    },
+    "tool_versions": {
+      "type": "object"
+    },
+    "diagnostics": {
+      "type": "array"
+    },
+    "wall_time_s": {
+      "type": "number"
+    }
+  },
+  "additionalProperties": true
+}

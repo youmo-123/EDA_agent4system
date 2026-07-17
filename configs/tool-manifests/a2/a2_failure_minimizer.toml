@@ -1,0 +1,13 @@
+tool_id = "a2_failure_minimizer"
+interface_version = "1.0"
+implementation = "script"
+entrypoint = "scripts/a2/failure/minimize.py"
+request_schema = "interfaces/tools/a2/a2-failure-minimizer.schema.json"
+result_schema = "interfaces/tools/common-result.schema.json"
+capabilities = ["failure-analysis"]
+required_env = []
+timeout_s = 900
+concurrency_limit = 1
+healthcheck = "scripts/a2/failure/minimize.py --self-check"
+license_id = ""
+third_party_disclosure = "THIRD_PARTY.md"

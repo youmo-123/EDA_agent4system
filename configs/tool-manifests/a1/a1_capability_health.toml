@@ -1,0 +1,13 @@
+tool_id = "a1_capability_health"
+interface_version = "1.0"
+implementation = "builtin"
+entrypoint = "dooragent.tooling.health:agent_health"
+request_schema = "interfaces/tools/a1/a1-capability-health.schema.json"
+result_schema = "interfaces/tools/common-result.schema.json"
+capabilities = ["health"]
+required_env = []
+timeout_s = 30
+concurrency_limit = 1
+healthcheck = ""
+license_id = ""
+third_party_disclosure = "THIRD_PARTY.md"

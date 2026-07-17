@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/tool-a1-simulate-request.schema.json",
+  "title": "Tool a1-simulate Request",
+  "type": "object",
+  "required": [
+    "parameters"
+  ],
+  "properties": {
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "compile_ref": {
+          "type": "string"
+        },
+        "tests_ref": {
+          "type": "string"
+        },
+        "seed": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "$ref": "../common-request.schema.json"
+    }
+  ]
+}

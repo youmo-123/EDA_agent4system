@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/events/event.schema.json",
+  "title": "Event Envelope",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "event_id",
+    "workflow_id",
+    "source",
+    "recipient",
+    "kind",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "event_id": {
+      "type": "string"
+    },
+    "workflow_id": {
+      "type": "string"
+    },
+    "workflow_round_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rtl_version_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "master",
+        "A1",
+        "A2",
+        "A3",
+        "hook",
+        "supervisor",
+        "tool"
+      ]
+    },
+    "recipient": {
+      "type": "string",
+      "enum": [
+        "master",
+        "A1",
+        "A2",
+        "A3",
+        "hook",
+        "observer"
+      ]
+    },
+    "kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "correlation_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "caused_by": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "artifact_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "payload": {
+      "type": "object"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": true
+}

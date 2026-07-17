@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/gate-1-request.schema.json",
+  "title": "Gate 1 Request",
+  "type": "object",
+  "required": [
+    "gate1_id",
+    "workflow_id",
+    "role",
+    "status"
+  ],
+  "properties": {
+    "gate1_id": {
+      "type": "string"
+    },
+    "workflow_id": {
+      "type": "string"
+    },
+    "workflow_round_id": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "A1",
+        "A2",
+        "A3"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "REQUESTED",
+        "VALIDATING",
+        "CREATING_WORKSPACES",
+        "SPAWNING",
+        "OPEN",
+        "REJECTED",
+        "WORKSPACE_FAILED",
+        "SPAWN_FAILED",
+        "ROLLED_BACK"
+      ]
+    },
+    "budget": {
+      "type": "object"
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": true
+}

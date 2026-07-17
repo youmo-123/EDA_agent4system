@@ -1,0 +1,13 @@
+tool_id = "a2_report_emitter"
+interface_version = "1.0"
+implementation = "script"
+entrypoint = "scripts/a2/reports.py"
+request_schema = "interfaces/tools/a2/a2-report-emitter.schema.json"
+result_schema = "interfaces/tools/common-result.schema.json"
+capabilities = ["reporting"]
+required_env = []
+timeout_s = 120
+concurrency_limit = 1
+healthcheck = "scripts/a2/reports.py --self-check"
+license_id = ""
+third_party_disclosure = "THIRD_PARTY.md"

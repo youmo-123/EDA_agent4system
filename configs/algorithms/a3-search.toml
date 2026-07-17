@@ -1,0 +1,22 @@
+# A3 搜索策略配置：默认 catalog；进化搜索仅在集成测试通过后启用
+
+search_mode = "catalog"  # 可选: catalog | evolutionary | parallel_catalog
+pareto_metrics = ["area", "arrival"]
+pareto_tie_breaker = "runtime_s"
+
+[budget]
+max_candidates = 20
+max_wall_time_s = 3600
+max_no_improve_generations = 3
+
+[evolutionary]
+enabled = false
+population_size = 12
+generations = 8
+elite_count = 2
+mutation_rate = 0.20
+crossover_rate = 0.80
+seed = 1
+# 进化搜索失败或连续无改进时必须自动回退 catalog
+fallback_on_no_improve = true
+fallback_on_backend_unavailable = true

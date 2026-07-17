@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/tool-a3-cost-model-request.schema.json",
+  "title": "Tool a3-cost-model Request",
+  "type": "object",
+  "required": [
+    "parameters"
+  ],
+  "properties": {
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "candidate_results": {
+          "type": "array"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "$ref": "../common-request.schema.json"
+    }
+  ]
+}

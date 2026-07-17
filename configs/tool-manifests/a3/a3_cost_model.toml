@@ -1,0 +1,13 @@
+tool_id = "a3_cost_model"
+interface_version = "1.0"
+implementation = "script"
+entrypoint = "scripts/a3/analysis/cost.py"
+request_schema = "interfaces/tools/a3/a3-cost-model.schema.json"
+result_schema = "interfaces/tools/common-result.schema.json"
+capabilities = ["cost-model", "pareto"]
+required_env = []
+timeout_s = 60
+concurrency_limit = 1
+healthcheck = "scripts/a3/analysis/cost.py --self-check"
+license_id = ""
+third_party_disclosure = "THIRD_PARTY.md"

@@ -1,0 +1,13 @@
+tool_id = "a3_synth_tool"
+interface_version = "1.0"
+implementation = "script"
+entrypoint = "scripts/a3/synth_tool.py"
+request_schema = "interfaces/tools/a3/a3-synth-tool.schema.json"
+result_schema = "interfaces/tools/common-result.schema.json"
+capabilities = ["synthesis"]
+required_env = []
+timeout_s = 1800
+concurrency_limit = 1
+healthcheck = "scripts/a3/synth_tool.py --self-check"
+license_id = ""
+third_party_disclosure = "THIRD_PARTY.md"

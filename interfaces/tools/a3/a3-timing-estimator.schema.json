@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/tool-a3-timing-estimator-request.schema.json",
+  "title": "Tool a3-timing-estimator Request",
+  "type": "object",
+  "required": [
+    "parameters"
+  ],
+  "properties": {
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "netlist_ref": {
+          "type": "string"
+        },
+        "sdc_ref": {
+          "type": "string"
+        },
+        "technology_library_ref": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "$ref": "../common-request.schema.json"
+    }
+  ]
+}

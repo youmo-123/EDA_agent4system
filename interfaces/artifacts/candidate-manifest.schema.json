@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/artifacts/candidate-manifest.schema.json",
+  "title": "Candidate Manifest",
+  "type": "object",
+  "required": [
+    "candidate_id",
+    "created_at",
+    "candidate_rtl_version_id",
+    "artifact_hash",
+    "schema_version",
+    "workflow_id",
+    "producer_agent_instance_id"
+  ],
+  "properties": {
+    "workflow_id": {
+      "type": "string"
+    },
+    "workflow_round_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rtl_version_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "producer_agent_instance_id": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "artifact_hash": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "candidate_id": {
+      "type": "string"
+    },
+    "candidate_rtl_version_id": {
+      "type": "string"
+    },
+    "parent_rtl_version_id": {
+      "type": "string"
+    },
+    "candidate_hash": {
+      "type": "string"
+    },
+    "search_experiment_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

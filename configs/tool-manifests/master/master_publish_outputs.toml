@@ -1,0 +1,13 @@
+tool_id = "master_publish_outputs"
+interface_version = "1.0"
+implementation = "script"
+entrypoint = "scripts/master/publish_outputs.py"
+request_schema = "interfaces/tools/master/master-publish-outputs.schema.json"
+result_schema = "interfaces/tools/common-result.schema.json"
+capabilities = ["publish"]
+required_env = []
+timeout_s = 300
+concurrency_limit = 1
+healthcheck = "scripts/master/publish_outputs.py --self-check"
+license_id = ""
+third_party_disclosure = "THIRD_PARTY.md"

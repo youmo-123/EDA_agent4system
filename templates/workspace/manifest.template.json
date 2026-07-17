@@ -1,0 +1,15 @@
+{
+  "workspace_type": "primary|child-service",
+  "role": "master|a1|a2|a3",
+  "workflow_id": "<workflow_id>",
+  "workflow_round_id": "<workflow_round_id>",
+  "agent_instance_id": "<agent_instance_id>",
+  "created_at": "<iso-8601>",
+  "layout": {
+    "inputs": "inputs/",
+    "artifacts": "artifacts/",
+    "logs": "logs/",
+    "state": "state/",
+    "exchange": "exchange/"
+  }
+}

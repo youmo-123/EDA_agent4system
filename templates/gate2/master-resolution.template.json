@@ -1,0 +1,16 @@
+{
+  "gate2_thread_id": "<uuid>",
+  "resolution": "CONTINUE|CONTINUE_WITH_CONSTRAINTS|REDIRECT|ROLLBACK|STOP_ROUND|REJECT_REQUEST",
+  "error_code": "<error-code>",
+  "severity": "info|warn|error|critical",
+  "phase": "<phase>",
+  "facts": [],
+  "suspected_causes": [],
+  "evidence_refs": [],
+  "allowed_actions": [],
+  "forbidden_actions": [],
+  "must_produce": [],
+  "success_conditions": [],
+  "reopen_conditions": [],
+  "resume_prompt_ref": "resume-prompt.md"
+}

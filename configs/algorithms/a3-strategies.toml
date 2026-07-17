@@ -1,0 +1,57 @@
+# A3 Strategy Catalog：稳定 strategy_id，参数空间与适用条件
+# Strategy 数量由 Catalog、设计特征、目标和预算决定，不使用数组序号
+
+[[strategies]]
+strategy_id = "balanced-default"
+backend_profile_id = "open-source-default"
+description = "平衡面积、时序和运行时间的通用基线"
+applicability = ["combinational", "sequential", "mixed"]
+[strategies.parameters]
+optimization_effort = "medium"
+mapping_effort = "medium"
+abc_script = "compress2rs; dch; if -K 6"
+yosys_prep = "hierarchy -auto-top; proc; flatten; opt; memory; opt"
+
+[[strategies]]
+strategy_id = "area-focused"
+backend_profile_id = "open-source-default"
+description = "面积优先的合法参数组合"
+applicability = ["combinational", "mixed"]
+[strategies.parameters]
+optimization_effort = "high"
+mapping_effort = "area"
+abc_script = "resyn2rs; resyn2rs; dch; if -K 6 -a"
+yosys_prep = "hierarchy -auto-top; proc; flatten; opt -full; memory; opt"
+
+[[strategies]]
+strategy_id = "timing-focused"
+backend_profile_id = "open-source-default"
+description = "时序优先，允许一定面积代价"
+applicability = ["sequential", "mixed"]
+[strategies.parameters]
+optimization_effort = "high"
+mapping_effort = "delay"
+abc_script = "dch -f; if -K 6 -g -C 8"
+yosys_prep = "hierarchy -auto-top; proc; flatten; opt; memory; opt"
+
+[[strategies]]
+strategy_id = "aggressive-mixed"
+backend_profile_id = "open-source-default"
+description = "两轮 compress+dch，兼顾面积和时序"
+applicability = ["combinational", "sequential", "mixed"]
+[strategies.parameters]
+optimization_effort = "very_high"
+mapping_effort = "balanced"
+abc_script = "compress2rs; compress2rs; dch; if -K 6"
+yosys_prep = "hierarchy -auto-top; proc; flatten; opt -full; memory; opt"
+
+[[strategies]]
+strategy_id = "quick-baseline"
+backend_profile_id = "open-source-default"
+description = "最短运行时间的合法综合，用于快速冒烟"
+applicability = ["combinational", "sequential", "mixed"]
+[strategies.parameters]
+optimization_effort = "low"
+mapping_effort = "fast"
+abc_script = "strash; dch; if -K 6"
+yosys_prep = "hierarchy -auto-top; proc; opt; memory; opt"

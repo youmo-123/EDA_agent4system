@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/artifacts/timing-result.schema.json",
+  "title": "Timing Result",
+  "type": "object",
+  "required": [
+    "created_at",
+    "artifact_hash",
+    "arrival",
+    "schema_version",
+    "workflow_id",
+    "slack",
+    "producer_agent_instance_id"
+  ],
+  "properties": {
+    "workflow_id": {
+      "type": "string"
+    },
+    "workflow_round_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rtl_version_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "producer_agent_instance_id": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "artifact_hash": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "arrival": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "slack": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "critical_path": {
+      "type": "array"
+    },
+    "backend": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

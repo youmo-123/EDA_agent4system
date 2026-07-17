@@ -1,0 +1,30 @@
+# Resource Lease Scheduler 配置
+
+[global]
+max_parallel_agent_instances = 4
+max_parallel_a1_instances = 2
+max_parallel_a3_evaluations = 2
+max_parallel_synthesis_jobs = 2
+
+[a1]
+cpu = 2
+memory_mb = 4096
+
+[a3.synthesis]
+cpu = 4
+memory_mb = 8192
+timeout_s = 1800
+
+[a3.sta]
+cpu = 2
+memory_mb = 4096
+timeout_s = 900
+
+[a2.simulation]
+cpu = 2
+memory_mb = 4096
+timeout_s = 1800
+
+[lease]
+default_lease_s = 600
+renew_before_s = 60

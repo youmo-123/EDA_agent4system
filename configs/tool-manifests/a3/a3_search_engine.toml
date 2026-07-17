@@ -1,0 +1,13 @@
+tool_id = "a3_search_engine"
+interface_version = "1.0"
+implementation = "script"
+entrypoint = "scripts/a3/search/strategies.py"
+request_schema = "interfaces/tools/a3/a3-search-engine.schema.json"
+result_schema = "interfaces/tools/common-result.schema.json"
+capabilities = ["search"]
+required_env = []
+timeout_s = 120
+concurrency_limit = 1
+healthcheck = "scripts/a3/search/strategies.py --self-check"
+license_id = ""
+third_party_disclosure = "THIRD_PARTY.md"

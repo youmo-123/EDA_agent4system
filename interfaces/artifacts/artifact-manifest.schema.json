@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/artifacts/artifact-manifest.schema.json",
+  "title": "Artifact Manifest",
+  "type": "object",
+  "required": [
+    "manifest_id",
+    "created_at",
+    "artifact_hash",
+    "schema_version",
+    "workflow_id",
+    "entries",
+    "producer_agent_instance_id"
+  ],
+  "properties": {
+    "workflow_id": {
+      "type": "string"
+    },
+    "workflow_round_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rtl_version_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "producer_agent_instance_id": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "artifact_hash": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "manifest_id": {
+      "type": "string"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "artifact_type",
+          "path",
+          "hash"
+        ],
+        "properties": {
+          "artifact_type": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "string"
+          },
+          "schema": {
+            "type": "string"
+          },
+          "depends_on": {
+            "type": "array"
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

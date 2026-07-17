@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/gate-2-resolution.schema.json",
+  "title": "Gate 2 Resolution",
+  "type": "object",
+  "required": [
+    "gate2_thread_id",
+    "resolution_id",
+    "resolution",
+    "created_at"
+  ],
+  "properties": {
+    "gate2_thread_id": {
+      "type": "string"
+    },
+    "resolution_id": {
+      "type": "string"
+    },
+    "resolution": {
+      "type": "string",
+      "enum": [
+        "CONTINUE",
+        "CONTINUE_WITH_CONSTRAINTS",
+        "REDIRECT",
+        "ROLLBACK",
+        "STOP_ROUND",
+        "REJECT_REQUEST"
+      ]
+    },
+    "error_code": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "severity": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "facts": {
+      "type": "array"
+    },
+    "suspected_causes": {
+      "type": "array"
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "allowed_actions": {
+      "type": "array"
+    },
+    "forbidden_actions": {
+      "type": "array"
+    },
+    "must_produce": {
+      "type": "array"
+    },
+    "success_conditions": {
+      "type": "array"
+    },
+    "reopen_conditions": {
+      "type": "array"
+    },
+    "resume_prompt_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": true
+}

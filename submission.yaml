@@ -1,0 +1,8 @@
+name: dooragent-eda
+version: "0.1.0"
+entrypoint: dooragent
+runtime:
+  python: ">=3.10"
+description: |
+  DoorAgent 多 Agent EDA 联合运行工具（Master / A1 / A2 / A3）。
+  对外只有 `dooragent run/resume/status/cancel` 入口。

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/artifacts/a3-candidate-result.schema.json",
+  "title": "A3 Candidate Result",
+  "type": "object",
+  "required": [
+    "candidate_id",
+    "created_at",
+    "artifact_hash",
+    "schema_version",
+    "workflow_id",
+    "cost_vector",
+    "producer_agent_instance_id"
+  ],
+  "properties": {
+    "workflow_id": {
+      "type": "string"
+    },
+    "workflow_round_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rtl_version_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "producer_agent_instance_id": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "artifact_hash": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "candidate_id": {
+      "type": "string"
+    },
+    "cost_vector": {
+      "type": "object"
+    },
+    "pareto_state": {
+      "type": "string",
+      "enum": [
+        "dominated",
+        "non-dominated",
+        "invalid"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

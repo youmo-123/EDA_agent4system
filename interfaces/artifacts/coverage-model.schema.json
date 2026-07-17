@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/artifacts/coverage-model.schema.json",
+  "title": "Coverage Model",
+  "type": "object",
+  "required": [
+    "bins",
+    "created_at",
+    "artifact_hash",
+    "model_id",
+    "schema_version",
+    "workflow_id",
+    "producer_agent_instance_id"
+  ],
+  "properties": {
+    "workflow_id": {
+      "type": "string"
+    },
+    "workflow_round_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rtl_version_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "producer_agent_instance_id": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "artifact_hash": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "model_id": {
+      "type": "string"
+    },
+    "bins": {
+      "type": "array"
+    },
+    "crosses": {
+      "type": "array"
+    },
+    "sampling_triggers": {
+      "type": "array"
+    },
+    "structural_metrics_requested": {
+      "type": "array"
+    },
+    "completion_goals": {
+      "type": "object"
+    },
+    "semantic_assumptions": {
+      "type": "array"
+    },
+    "model_hash": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

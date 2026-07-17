@@ -1,0 +1,101 @@
+# 四个 Agent 的配置：允许 Tool、允许 Skill、Prompt 路径、资源上限
+
+[master]
+role = "MASTER"
+system_prompt = "templates/prompts/master/system.md"
+skills = [
+  "templates/skills/master/workflow-supervision/SKILL.md",
+  "templates/skills/master/evidence-review/SKILL.md",
+  "templates/skills/master/gate-resolution/SKILL.md",
+  "templates/skills/master/resource-scheduling/SKILL.md",
+  "templates/skills/master/round-retrospective/SKILL.md",
+  "templates/skills/master/final-reporting/SKILL.md",
+]
+allowed_tools = [
+  "master_schedule_task",
+  "master_create_workspace",
+  "master_materialize_exchange",
+  "master_verify_artifacts",
+  "master_resolve_gate",
+  "master_archive_round",
+  "master_publish_outputs",
+]
+
+[a1]
+role = "A1"
+system_prompt = "templates/prompts/a1/system.md"
+skills = [
+  "templates/skills/a1/simulation-execution/SKILL.md",
+  "templates/skills/a1/coverage-measurement/SKILL.md",
+  "templates/skills/a1/simulation-bottleneck-analysis/SKILL.md",
+  "templates/skills/a1/coverage-hotspot-analysis/SKILL.md",
+  "templates/skills/a1/incremental-build-analysis/SKILL.md",
+  "templates/skills/a1/parallel-simulation-analysis/SKILL.md",
+]
+allowed_tools = [
+  "a1_compile",
+  "a1_simulate",
+  "a1_diagnostic_coverage",
+  "a1_profile_metrics",
+  "a1_trace_export",
+  "a1_source_map",
+  "a1_bottleneck_analyzer",
+  "a1_coverage_hotspot_analyzer",
+  "a1_capability_health",
+]
+max_instances = 4
+
+[a2]
+role = "A2"
+system_prompt = "templates/prompts/a2/system.md"
+skills = [
+  "templates/skills/a2/rtl-interface-analysis/SKILL.md",
+  "templates/skills/a2/verification-skeleton-generation/SKILL.md",
+  "templates/skills/a2/coverage-model-generation/SKILL.md",
+  "templates/skills/a2/constrained-random-test-generation/SKILL.md",
+  "templates/skills/a2/coverage-guided-test-optimization/SKILL.md",
+  "templates/skills/a2/failure-attribution-and-minimization/SKILL.md",
+  "templates/skills/a2/assertion-inference/SKILL.md",
+]
+allowed_tools = [
+  "a2_run",
+  "a2_rtl_interface_analyzer",
+  "a2_verification_skeleton_generator",
+  "a2_coverage_model_generator",
+  "a2_constraint_model_builder",
+  "a2_test_generator",
+  "a2_simulation_coverage",
+  "a2_report_emitter",
+  "a2_coverage_gap_analyzer",
+  "a2_strategy_selector",
+  "a2_failure_minimizer",
+  "a2_assertion_inferencer",
+]
+
+[a3]
+role = "A3"
+system_prompt = "templates/prompts/a3/system.md"
+skills = [
+  "templates/skills/a3/rtl-to-aig/SKILL.md",
+  "templates/skills/a3/aig-rewrite/SKILL.md",
+  "templates/skills/a3/technology-mapping/SKILL.md",
+  "templates/skills/a3/timing-estimation/SKILL.md",
+  "templates/skills/a3/ppa-cost-model/SKILL.md",
+  "templates/skills/a3/ppa-search/SKILL.md",
+  "templates/skills/a3/evolutionary-search/SKILL.md",
+  "templates/skills/a3/hotspot-localization/SKILL.md",
+  "templates/skills/a3/rtl-optimization-recommendation/SKILL.md",
+]
+allowed_tools = [
+  "a3_synth_tool",
+  "a3_synthesis_frontend",
+  "a3_logic_optimizer",
+  "a3_equivalence_check",
+  "a3_timing_estimator",
+  "a3_netlist_validator",
+  "a3_cost_model",
+  "a3_search_engine",
+  "a3_evolutionary_search",
+  "a3_hotspot_localizer",
+  "a3_rtl_recommender",
+]

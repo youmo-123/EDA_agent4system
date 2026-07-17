@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/tool-master-schedule-task-request.schema.json",
+  "title": "Tool master-schedule-task Request",
+  "type": "object",
+  "required": [
+    "parameters"
+  ],
+  "properties": {
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "policy": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "$ref": "../common-request.schema.json"
+    }
+  ]
+}

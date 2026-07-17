@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/a2-agent-result.schema.json",
+  "title": "A2 Agent Result",
+  "type": "object",
+  "required": [
+    "agent_role"
+  ],
+  "properties": {
+    "agent_role": {
+      "const": "A2"
+    }
+  },
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "$ref": "common-result.schema.json"
+    }
+  ]
+}

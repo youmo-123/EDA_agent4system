@@ -1,0 +1,13 @@
+tool_id = "master_resolve_gate"
+interface_version = "1.0"
+implementation = "builtin"
+entrypoint = "dooragent.orchestration.gates:resolve_gate"
+request_schema = "interfaces/tools/master/master-resolve-gate.schema.json"
+result_schema = "interfaces/tools/common-result.schema.json"
+capabilities = ["gate-resolution"]
+required_env = []
+timeout_s = 30
+concurrency_limit = 1
+healthcheck = "dooragent.orchestration.gates:health"
+license_id = ""
+third_party_disclosure = "THIRD_PARTY.md"

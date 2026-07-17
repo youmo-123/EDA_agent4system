@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/tool-a3-synth-tool-request.schema.json",
+  "title": "Tool a3-synth-tool Request",
+  "type": "object",
+  "required": [
+    "parameters"
+  ],
+  "properties": {
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "rtl_ref": {
+          "type": "string"
+        },
+        "top": {
+          "type": "string"
+        },
+        "sdc_ref": {
+          "type": "string"
+        },
+        "technology_library_ref": {
+          "type": "string"
+        },
+        "backend_profile_id": {
+          "type": "string"
+        },
+        "strategy_id": {
+          "type": "string"
+        },
+        "design_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "output_dir": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "$ref": "../common-request.schema.json"
+    }
+  ]
+}

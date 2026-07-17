@@ -1,0 +1,13 @@
+tool_id = "a1_diagnostic_coverage"
+interface_version = "1.0"
+implementation = "script"
+entrypoint = "scripts/a1/coverage.py"
+request_schema = "interfaces/tools/a1/a1-diagnostic-coverage.schema.json"
+result_schema = "interfaces/tools/common-result.schema.json"
+capabilities = ["diagnostic-coverage"]
+required_env = []
+timeout_s = 600
+concurrency_limit = 1
+healthcheck = "scripts/a1/coverage.py --self-check"
+license_id = ""
+third_party_disclosure = "THIRD_PARTY.md"

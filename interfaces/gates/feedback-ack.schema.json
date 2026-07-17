@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/feedback-ack.schema.json",
+  "title": "Feedback ACK",
+  "type": "object",
+  "required": [
+    "status",
+    "resolution_id"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": [
+        "accepted",
+        "missing_artifact",
+        "hash_mismatch",
+        "constraint_conflict",
+        "unsupported"
+      ]
+    },
+    "resolution_id": {
+      "type": "string"
+    },
+    "planned_next_action": {
+      "type": "string"
+    },
+    "will_produce": {
+      "type": "array"
+    }
+  },
+  "additionalProperties": true
+}

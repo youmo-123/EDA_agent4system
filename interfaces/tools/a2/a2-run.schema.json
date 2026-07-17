@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/tool-a2-run-request.schema.json",
+  "title": "Tool a2-run Request",
+  "type": "object",
+  "required": [
+    "parameters"
+  ],
+  "properties": {
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "rtl_refs": {
+          "type": "array"
+        },
+        "top": {
+          "type": "string"
+        },
+        "seed": {
+          "type": "integer"
+        },
+        "num_sequences": {
+          "type": "integer"
+        },
+        "backends": {
+          "type": "object"
+        },
+        "a1_function_gate": {
+          "type": "string",
+          "enum": [
+            "required",
+            "best_effort",
+            "disabled"
+          ]
+        },
+        "output_dir": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "$ref": "../common-request.schema.json"
+    }
+  ]
+}

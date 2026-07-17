@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/a1-agent-task.schema.json",
+  "title": "A1 Agent Task",
+  "type": "object",
+  "required": [
+    "operation",
+    "agent_role"
+  ],
+  "properties": {
+    "operation": {
+      "type": "string",
+      "enum": [
+        "compile",
+        "simulate",
+        "measure_diagnostic_coverage",
+        "analyze_bottleneck",
+        "analyze_coverage_hotspot",
+        "full_simulation_analysis",
+        "health"
+      ]
+    },
+    "agent_role": {
+      "const": "A1"
+    }
+  },
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "$ref": "common-task.schema.json"
+    }
+  ]
+}

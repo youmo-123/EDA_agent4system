@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dooragent-eda"
+version = "0.1.0"
+description = "DoorAgent multi-agent EDA runtime (Master / A1 / A2 / A3)"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "DoorAgent"}]
+license = {text = "Apache-2.0"}
+dependencies = [
+    "jsonschema>=4.21",
+    "tomli>=2.0; python_version<'3.11'",
+]
+
+[project.optional-dependencies]
+# 以下运行时后端依赖按需安装；缺失时对应能力返回 UNAVAILABLE，不影响控制面。
+eda = [
+    "pyverilog",
+    "z3-solver",
+    "cocotb",
+    "cocotbext-axi",
+]
+
+[project.scripts]
+dooragent = "dooragent.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["dooragent*"]
+
+[tool.setuptools.package-data]
+"dooragent" = ["py.typed"]
+

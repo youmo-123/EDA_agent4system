@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/agents/common-result.schema.json",
+  "title": "Agent Common Result Envelope",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "interface_version",
+    "task_id",
+    "agent_instance_id",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "pattern": "^\\d+\\.\\d+$"},
+    "interface_version": {"type": "string", "pattern": "^\\d+\\.\\d+$"},
+    "task_id": {"type": "string"},
+    "agent_instance_id": {"type": "string"},
+    "status": {
+      "type": "string",
+      "enum": ["completed", "partial", "failed", "waiting_gate2", "cancelled", "unavailable"]
+    },
+    "output_artifact_refs": {"type": "array", "items": {"type": "string"}},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "diagnostics": {"type": "array"},
+    "metrics": {"type": "object"},
+    "capability_state": {"type": "string", "enum": ["healthy", "degraded", "unavailable"]},
+    "suggested_next_actions": {"type": "array"},
+    "error": {"type": ["object", "null"]}
+  },
+  "additionalProperties": true
+}

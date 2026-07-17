@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/agents/common-task.schema.json",
+  "title": "Agent Common Task Envelope",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "interface_version",
+    "task_id",
+    "idempotency_key",
+    "workflow_id",
+    "workflow_round_id",
+    "agent_role",
+    "operation"
+  ],
+  "properties": {
+    "schema_version": {"type": "string", "pattern": "^\\d+\\.\\d+$"},
+    "interface_version": {"type": "string", "pattern": "^\\d+\\.\\d+$"},
+    "task_id": {"type": "string", "minLength": 1},
+    "idempotency_key": {"type": "string", "minLength": 1},
+    "workflow_id": {"type": "string", "minLength": 1},
+    "workflow_round_id": {"type": "string", "minLength": 1},
+    "rtl_version_id": {"type": ["string", "null"]},
+    "agent_role": {"type": "string", "enum": ["MASTER", "A1", "A2", "A3"]},
+    "operation": {"type": "string", "minLength": 1},
+    "input_artifact_refs": {"type": "array", "items": {"type": "string"}},
+    "constraints": {"type": "object"},
+    "budget": {"type": "object"},
+    "requested_outputs": {"type": "array", "items": {"type": "string"}},
+    "reply_to": {"type": ["string", "null"]}
+  },
+  "additionalProperties": true
+}

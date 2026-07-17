@@ -1,0 +1,13 @@
+tool_id = "master_verify_artifacts"
+interface_version = "1.0"
+implementation = "script"
+entrypoint = "scripts/master/verify_artifacts.py"
+request_schema = "interfaces/tools/master/master-verify-artifacts.schema.json"
+result_schema = "interfaces/tools/common-result.schema.json"
+capabilities = ["artifact-verification"]
+required_env = []
+timeout_s = 120
+concurrency_limit = 1
+healthcheck = "scripts/master/verify_artifacts.py --self-check"
+license_id = ""
+third_party_disclosure = "THIRD_PARTY.md"

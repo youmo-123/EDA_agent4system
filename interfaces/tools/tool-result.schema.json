@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/tools/tool-result.schema.json",
+  "title": "Tool Result (alias)",
+  "allOf": [
+    {
+      "$ref": "common-result.schema.json"
+    }
+  ]
+}

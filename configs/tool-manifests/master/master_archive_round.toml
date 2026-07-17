@@ -1,0 +1,13 @@
+tool_id = "master_archive_round"
+interface_version = "1.0"
+implementation = "script"
+entrypoint = "scripts/master/archive_round.py"
+request_schema = "interfaces/tools/master/master-archive-round.schema.json"
+result_schema = "interfaces/tools/common-result.schema.json"
+capabilities = ["archive"]
+required_env = []
+timeout_s = 300
+concurrency_limit = 1
+healthcheck = "scripts/master/archive_round.py --self-check"
+license_id = ""
+third_party_disclosure = "THIRD_PARTY.md"

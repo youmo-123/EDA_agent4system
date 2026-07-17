@@ -1,0 +1,13 @@
+tool_id = "a2_strategy_selector"
+interface_version = "1.0"
+implementation = "builtin"
+entrypoint = "dooragent.agents.a2.policy:select_strategy"
+request_schema = "interfaces/tools/a2/a2-strategy-selector.schema.json"
+result_schema = "interfaces/tools/common-result.schema.json"
+capabilities = ["strategy"]
+required_env = []
+timeout_s = 30
+concurrency_limit = 1
+healthcheck = ""
+license_id = ""
+third_party_disclosure = "THIRD_PARTY.md"

@@ -1,0 +1,163 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import shutil
+import subprocess
+import sys
+import time
+from pathlib import Path
+from typing import Any
+
+
+def atomic_write(path: Path, data: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    partial = path.with_suffix(path.suffix + ".partial")
+    with partial.open("w", encoding="utf-8") as fh:
+        json.dump(data, fh, ensure_ascii=False, indent=2, sort_keys=True)
+        fh.write("\n")
+        fh.flush()
+        os.fsync(fh.fileno())
+    os.replace(partial, path)
+
+
+def load_json(path: Path) -> Any:
+    with path.open("r", encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+def select_point(config: dict[str, Any], circuit: str, point: int) -> dict[str, Any]:
+    points = config.get(circuit) or config.get("$default") or []
+    if point < 1 or point > len(points):
+        raise ValueError(f"point {point} outside 1..{len(points)}")
+    selected = dict(points[point - 1])
+    selected["point"] = point
+    selected["selected_circuit"] = circuit if circuit in config else "$default"
+    return selected
+
+
+def run_cmd(cmd: list[str], timeout_s: int, cwd: Path) -> dict[str, Any]:
+    started = time.monotonic()
+    proc = subprocess.run(cmd, cwd=cwd, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=timeout_s, check=False)
+    return {"cmd": cmd, "returncode": proc.returncode, "stdout_tail": proc.stdout[-4000:], "stderr_tail": proc.stderr[-4000:], "wall_time_s": time.monotonic() - started}
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="A3 open_source_based synthesis entry")
+    parser.add_argument("--rtl", required=True)
+    parser.add_argument("--top", required=True)
+    parser.add_argument("--sdc", required=True)
+    parser.add_argument("--liberty", required=True)
+    parser.add_argument("--config", required=True)
+    parser.add_argument("--circuit", required=True)
+    parser.add_argument("--point", type=int, required=True)
+    parser.add_argument("--output", required=True)
+    parser.add_argument("--work-dir", required=True)
+    parser.add_argument("--report-json", required=True)
+    parser.add_argument("--timeout-s", type=int, default=1800)
+    args = parser.parse_args(argv)
+
+    started = time.monotonic()
+    work_dir = Path(args.work_dir)
+    work_dir.mkdir(parents=True, exist_ok=True)
+    report_path = Path(args.report_json)
+    output_path = Path(args.output)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    report: dict[str, Any] = {
+        "schema_version": "1.0",
+        "development_track": "open_source_based",
+        "status": "failed",
+        "stage": "init",
+        "rtl": args.rtl,
+        "top": args.top,
+        "sdc": args.sdc,
+        "liberty": args.liberty,
+        "circuit": args.circuit,
+        "point": args.point,
+        "commands": [],
+        "tool_versions": {},
+        "metrics": {},
+        "error_code": None,
+        "message": None,
+    }
+    try:
+        for required in [args.rtl, args.sdc, args.liberty, args.config]:
+            if not Path(required).exists():
+                report.update({"stage": "validate-inputs", "error_code": "ARTIFACT_MISSING", "message": f"missing input: {required}", "wall_time_s": time.monotonic() - started})
+                atomic_write(report_path, report)
+                return 4
+        yosys = os.environ.get("DOORAGENT_YOSYS_BIN", "yosys")
+        sta = os.environ.get("DOORAGENT_OPENSTA_BIN", "sta")
+        if shutil.which(yosys) is None:
+            report.update({"stage": "healthcheck", "error_code": "CAPABILITY_UNAVAILABLE", "message": f"yosys not found: {yosys}", "wall_time_s": time.monotonic() - started})
+            atomic_write(report_path, report)
+            return 3
+        if shutil.which(sta) is None:
+            report.update({"stage": "healthcheck", "error_code": "CAPABILITY_UNAVAILABLE", "message": f"opensta not found: {sta}", "wall_time_s": time.monotonic() - started})
+            atomic_write(report_path, report)
+            return 3
+        point_cfg = select_point(load_json(Path(args.config)), args.circuit, args.point)
+        report["point_config"] = point_cfg
+        yosys_script = work_dir / "generated.ys"
+        yosys_script.write_text(
+            "\n".join([
+                f"read_verilog {args.rtl}",
+                f"hierarchy -check -top {args.top}",
+                "proc",
+                "opt",
+                "memory",
+                "opt",
+                f"abc -liberty {args.liberty}",
+                f"write_verilog {output_path}",
+            ]) + "\n",
+            encoding="utf-8",
+        )
+        report["stage"] = "yosys"
+        yosys_run = run_cmd([yosys, "-s", str(yosys_script)], args.timeout_s, work_dir)
+        report["commands"].append(yosys_run)
+        if yosys_run["returncode"] != 0 or not output_path.exists() or output_path.stat().st_size == 0:
+            report.update({"error_code": "A3_MAPPING_FAILED", "message": "Yosys/ABC failed or produced empty netlist", "wall_time_s": time.monotonic() - started})
+            atomic_write(report_path, report)
+            return 4
+        sta_script = work_dir / "run_sta.tcl"
+        sta_report = work_dir / "opensta.rpt"
+        sta_script.write_text(
+            "\n".join([
+                f"read_liberty {args.liberty}",
+                f"read_verilog {output_path}",
+                f"link_design {args.top}",
+                f"read_sdc {args.sdc}",
+                f"report_checks > {sta_report}",
+                "report_design_area",
+            ]) + "\n",
+            encoding="utf-8",
+        )
+        report["stage"] = "opensta"
+        sta_run = run_cmd([sta, str(sta_script)], args.timeout_s, work_dir)
+        report["commands"].append(sta_run)
+        if sta_run["returncode"] != 0:
+            report.update({"error_code": "A3_TIMING_ESTIMATION_FAILED", "message": "OpenSTA failed", "wall_time_s": time.monotonic() - started})
+            atomic_write(report_path, report)
+            return 4
+        report.update({"status": "completed", "stage": "completed", "error_code": None, "message": None, "netlist": str(output_path), "timing_report": str(sta_report), "wall_time_s": time.monotonic() - started})
+        atomic_write(report_path, report)
+        return 0
+    except ValueError as exc:
+        report.update({"error_code": "INVALID_REQUEST", "message": str(exc), "wall_time_s": time.monotonic() - started})
+        atomic_write(report_path, report)
+        return 2
+    except subprocess.TimeoutExpired:
+        report.update({"error_code": "TOOL_TIMEOUT", "message": "external synthesis command timed out", "wall_time_s": time.monotonic() - started})
+        atomic_write(report_path, report)
+        return 124
+    except Exception as exc:
+        report.update({"error_code": "TOOL_CRASHED", "message": str(exc), "wall_time_s": time.monotonic() - started})
+        atomic_write(report_path, report)
+        return 4
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

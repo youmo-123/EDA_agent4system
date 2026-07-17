@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/a2-agent-task.schema.json",
+  "title": "A2 Agent Task",
+  "type": "object",
+  "required": [
+    "operation",
+    "agent_role"
+  ],
+  "properties": {
+    "operation": {
+      "type": "string",
+      "enum": [
+        "analyze_rtl",
+        "generate_verification",
+        "generate_coverage_model",
+        "generate_tests",
+        "analyze_coverage_gap",
+        "refine_tests",
+        "minimize_failure",
+        "infer_assertions",
+        "health"
+      ]
+    },
+    "agent_role": {
+      "const": "A2"
+    }
+  },
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "$ref": "common-task.schema.json"
+    }
+  ]
+}

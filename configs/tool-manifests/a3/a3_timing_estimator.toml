@@ -1,0 +1,13 @@
+tool_id = "a3_timing_estimator"
+interface_version = "1.0"
+implementation = "script"
+entrypoint = "scripts/a3/backends/opensta.py"
+request_schema = "interfaces/tools/a3/a3-timing-estimator.schema.json"
+result_schema = "interfaces/tools/common-result.schema.json"
+capabilities = ["sta"]
+required_env = []
+timeout_s = 600
+concurrency_limit = 1
+healthcheck = "scripts/a3/backends/opensta.py --self-check"
+license_id = ""
+third_party_disclosure = "THIRD_PARTY.md"

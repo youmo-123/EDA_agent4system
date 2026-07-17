@@ -1,0 +1,21 @@
+{
+  "rtl": {
+    "files": ["inputs/rtl/design.sv"],
+    "top": "top"
+  },
+  "constraints": "inputs/constraints/dooragent.json",
+  "objectives": ["verification", "simulation-analysis", "ppa-optimization"],
+  "budget": {
+    "wall_time_s": 7200,
+    "max_parallel_agent_instances": 4,
+    "max_parallel_a1_instances": 2,
+    "max_parallel_a3_evaluations": 2,
+    "max_parallel_synthesis_jobs": 2,
+    "a3_cpu_budget": 4,
+    "a3_memory_mb": 8192
+  },
+  "a3": {
+    "backend_profile_id": "open-source-default",
+    "strategies": ["balanced-default", "area-focused", "timing-focused"]
+  }
+}

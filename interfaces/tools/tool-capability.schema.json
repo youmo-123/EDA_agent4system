@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/tool-capability.schema.json",
+  "title": "Tool Capability",
+  "type": "object",
+  "required": [
+    "tool_id",
+    "state",
+    "implementation"
+  ],
+  "properties": {
+    "tool_id": {
+      "type": "string"
+    },
+    "interface_version": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "DECLARED_NOT_BOUND",
+        "BOUND_UNVERIFIED",
+        "HEALTHY",
+        "DEGRADED",
+        "UNAVAILABLE"
+      ]
+    },
+    "implementation": {
+      "type": "string",
+      "enum": [
+        "adapter",
+        "builtin",
+        "external",
+        "script",
+        "mock"
+      ]
+    },
+    "tool_versions": {
+      "type": "object"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

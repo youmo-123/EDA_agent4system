@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/tools/common-request.schema.json",
+  "title": "Tool Common Request Envelope",
+  "type": "object",
+  "required": ["tool_id", "tool_interface_version", "request_id", "agent_instance_id", "workspace_root"],
+  "properties": {
+    "tool_id": {"type": "string", "minLength": 1},
+    "tool_interface_version": {"type": "string", "pattern": "^\\d+\\.\\d+$"},
+    "request_id": {"type": "string", "minLength": 1},
+    "agent_instance_id": {"type": "string", "minLength": 1},
+    "workspace_root": {"type": "string", "minLength": 1},
+    "input_artifact_refs": {"type": "array", "items": {"type": "string"}},
+    "parameters": {"type": "object"},
+    "output_dir": {"type": ["string", "null"]},
+    "timeout_s": {"type": ["integer", "null"], "minimum": 1}
+  },
+  "additionalProperties": true
+}

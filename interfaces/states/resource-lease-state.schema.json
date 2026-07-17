@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/resource-lease-state.schema.json",
+  "title": "Resource Lease State",
+  "type": "object",
+  "required": [
+    "entity_id",
+    "state",
+    "state_version"
+  ],
+  "properties": {
+    "entity_id": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "REQUESTED",
+        "QUEUED",
+        "GRANTED",
+        "ACTIVE",
+        "RELEASING",
+        "RELEASED",
+        "EXPIRED",
+        "REVOKED"
+      ]
+    },
+    "state_version": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": true
+}

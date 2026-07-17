@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/state-envelope.schema.json",
+  "title": "State Envelope",
+  "type": "object",
+  "required": [
+    "entity_type",
+    "entity_id",
+    "state_version",
+    "lifecycle_state"
+  ],
+  "properties": {
+    "entity_type": {
+      "type": "string"
+    },
+    "entity_id": {
+      "type": "string"
+    },
+    "state_version": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "lifecycle_state": {
+      "type": "string",
+      "enum": [
+        "new",
+        "ready",
+        "running",
+        "waiting",
+        "finalizing",
+        "terminal"
+      ]
+    },
+    "health_state": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "normal",
+        "degraded",
+        "error"
+      ]
+    },
+    "outcome_state": {
+      "type": "string",
+      "enum": [
+        "none",
+        "success",
+        "partial",
+        "failure",
+        "inconclusive"
+      ]
+    },
+    "report_state": {
+      "type": "string",
+      "enum": [
+        "not_required",
+        "pending",
+        "submitted",
+        "validated",
+        "rejected",
+        "missing"
+      ]
+    },
+    "evidence_state": {
+      "type": "string",
+      "enum": [
+        "none",
+        "partial",
+        "complete",
+        "invalid"
+      ]
+    },
+    "blocking_state": {
+      "type": "string",
+      "enum": [
+        "none",
+        "wait_master",
+        "wait_agent",
+        "wait_a1",
+        "wait_resource",
+        "wait_tool"
+      ]
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "patch": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": true
+}

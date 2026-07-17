@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/a3-agent-task.schema.json",
+  "title": "A3 Agent Task",
+  "type": "object",
+  "required": [
+    "operation",
+    "agent_role"
+  ],
+  "properties": {
+    "operation": {
+      "type": "string",
+      "enum": [
+        "synthesize",
+        "evaluate_strategy",
+        "estimate_timing",
+        "validate_netlist",
+        "search_ppa",
+        "locate_hotspots",
+        "recommend_rtl",
+        "reevaluate_candidate",
+        "health"
+      ]
+    },
+    "agent_role": {
+      "const": "A3"
+    }
+  },
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "$ref": "common-task.schema.json"
+    }
+  ]
+}

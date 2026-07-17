@@ -1,0 +1,29 @@
+# Tool Registry 全局配置
+# 具体每个 Tool 的 Manifest 位于 configs/tool-manifests/<role>/<tool-id>.toml
+
+[registry]
+manifest_dirs = [
+  "configs/tool-manifests/master",
+  "configs/tool-manifests/a1",
+  "configs/tool-manifests/a2",
+  "configs/tool-manifests/a3",
+]
+strict = true
+# 未在任何 Manifest 声明的 Tool ID 一律拒绝调用
+allow_unregistered = false
+
+[health]
+# 启动时统一 health check；DEGRADED/UNAVAILABLE 只影响对应 Tool，不影响 CLI
+startup_check = true
+periodic_interval_s = 300
+
+[runner]
+# 通用 subprocess Runner 默认参数
+default_timeout_s = 600
+kill_after_s = 5
+env_whitelist = [
+  "PATH", "HOME", "USER", "LANG", "LC_ALL", "TMPDIR",
+  "DOORAGENT_YOSYS_BIN", "DOORAGENT_ABC_BIN", "DOORAGENT_OPENSTA_BIN",
+  "DOORAGENT_ICARUS_IVERILOG_BIN", "DOORAGENT_ICARUS_VVP_BIN",
+  "DOORAGENT_VCS_BIN", "DOORAGENT_URG_BIN",
+]

@@ -1,0 +1,13 @@
+tool_id = "a1_source_map"
+interface_version = "1.0"
+implementation = "script"
+entrypoint = "scripts/a1/source_map.py"
+request_schema = "interfaces/tools/a1/a1-source-map.schema.json"
+result_schema = "interfaces/tools/common-result.schema.json"
+capabilities = ["source-map"]
+required_env = []
+timeout_s = 300
+concurrency_limit = 1
+healthcheck = "scripts/a1/source_map.py --self-check"
+license_id = ""
+third_party_disclosure = "THIRD_PARTY.md"

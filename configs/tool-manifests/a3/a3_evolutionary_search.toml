@@ -1,0 +1,13 @@
+tool_id = "a3_evolutionary_search"
+interface_version = "1.0"
+implementation = "script"
+entrypoint = "scripts/a3/search/evolutionary.py"
+request_schema = "interfaces/tools/a3/a3-evolutionary-search.schema.json"
+result_schema = "interfaces/tools/common-result.schema.json"
+capabilities = ["search", "evolutionary"]
+required_env = []
+timeout_s = 3600
+concurrency_limit = 1
+healthcheck = "scripts/a3/search/evolutionary.py --self-check"
+license_id = ""
+third_party_disclosure = "THIRD_PARTY.md"

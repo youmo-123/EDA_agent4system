@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/tools/common-result.schema.json",
+  "title": "Tool Common Result Envelope",
+  "type": "object",
+  "required": ["tool_id", "tool_interface_version", "request_id", "status"],
+  "properties": {
+    "tool_id": {"type": "string"},
+    "tool_interface_version": {"type": "string", "pattern": "^\\d+\\.\\d+$"},
+    "request_id": {"type": "string"},
+    "status": {
+      "type": "string",
+      "enum": [
+        "completed", "partial", "failed", "timeout",
+        "cancelled", "unsupported", "unavailable"
+      ]
+    },
+    "output_artifact_refs": {"type": "array", "items": {"type": "string"}},
+    "raw_metrics": {"type": "object"},
+    "diagnostics": {"type": "array"},
+    "wall_time_s": {"type": ["number", "null"], "minimum": 0},
+    "error": {"type": ["object", "null"]},
+    "error_code": {"type": ["string", "null"]},
+    "tool_versions": {"type": ["object", "null"]},
+    "command_refs": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

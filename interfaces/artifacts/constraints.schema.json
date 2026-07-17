@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/artifacts/constraints.schema.json",
+  "title": "Constraints",
+  "type": "object",
+  "required": [
+    "created_at",
+    "artifact_hash",
+    "model_id",
+    "schema_version",
+    "workflow_id",
+    "producer_agent_instance_id"
+  ],
+  "properties": {
+    "workflow_id": {
+      "type": "string"
+    },
+    "workflow_round_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rtl_version_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "producer_agent_instance_id": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "artifact_hash": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "model_id": {
+      "type": "string"
+    },
+    "solver_backend": {
+      "type": "string"
+    },
+    "constraints": {
+      "type": "array"
+    },
+    "sat_status": {
+      "type": "string",
+      "enum": [
+        "sat",
+        "unsat",
+        "unknown"
+      ]
+    }
+  },
+  "additionalProperties": true
+}

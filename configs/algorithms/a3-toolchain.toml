@@ -1,0 +1,32 @@
+# A3 Backend Profile：可插拔综合/优化/映射/STA/预检 Backend
+# 每个 profile 指定一组 Capability 到具体后端 ID 的绑定
+
+[[profiles]]
+profile_id = "open-source-default"
+description = "Yosys + ABC + OpenSTA + Icarus 的默认开源组合"
+[profiles.backends]
+synthesis = "yosys"
+logic_optimizer = "abc"
+mapping = "abc"
+sta = "opensta"
+gate_precheck = "icarus"
+[profiles.technology_library]
+# 只声明兼容格式与来源，不入库真实 Liberty
+format = "liberty"
+source = "user-provided"
+
+[[profiles]]
+profile_id = "mock-inhouse"
+description = "内置 Mock 后端；用于契约/单元测试；不允许在生产运行使用"
+[profiles.backends]
+synthesis = "mock_synthesis"
+logic_optimizer = "mock_optimizer"
+mapping = "mock_mapper"
+sta = "mock_sta"
+gate_precheck = "mock_precheck"
+
+[technology_libraries.nangate45]
+format = "liberty"
+license = "third-party"
+disclosure = "THIRD_PARTY.md"
+# Liberty 文件路径由请求或部署环境注入，不写入源码库

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/tool-health-request.schema.json",
+  "title": "Tool Health Request",
+  "type": "object",
+  "required": [
+    "tool_id",
+    "request_id"
+  ],
+  "properties": {
+    "tool_id": {
+      "type": "string"
+    },
+    "request_id": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/agent-instance-state.schema.json",
+  "title": "Agent Instance State",
+  "type": "object",
+  "required": [
+    "entity_id",
+    "state",
+    "state_version"
+  ],
+  "properties": {
+    "entity_id": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "ALLOCATED",
+        "STARTING",
+        "RUNNING",
+        "SAFEPOINT_PENDING",
+        "WAITING_GATE2",
+        "RESUMING",
+        "FINALIZING",
+        "EXITED"
+      ]
+    },
+    "state_version": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": true
+}

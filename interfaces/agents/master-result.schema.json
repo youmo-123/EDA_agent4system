@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/master-agent-result.schema.json",
+  "title": "MASTER Agent Result",
+  "type": "object",
+  "required": [
+    "agent_role"
+  ],
+  "properties": {
+    "agent_role": {
+      "const": "MASTER"
+    }
+  },
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "$ref": "common-result.schema.json"
+    }
+  ]
+}

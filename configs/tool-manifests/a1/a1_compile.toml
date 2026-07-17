@@ -1,0 +1,13 @@
+tool_id = "a1_compile"
+interface_version = "1.0"
+implementation = "script"
+entrypoint = "scripts/a1/compile.py"
+request_schema = "interfaces/tools/a1/a1-compile.schema.json"
+result_schema = "interfaces/tools/common-result.schema.json"
+capabilities = ["rtl-compile"]
+required_env = []
+timeout_s = 900
+concurrency_limit = 1
+healthcheck = "scripts/a1/compile.py --self-check"
+license_id = ""
+third_party_disclosure = "THIRD_PARTY.md"

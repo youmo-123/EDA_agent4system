@@ -1,0 +1,35 @@
+# DoorAgent 全局默认配置
+# 优先级：环境变量 > runs/<workflow>/workflow/request.json > 本文件
+
+[runtime]
+# 相对 product_run_root 的路径，禁止使用绝对路径
+product_run_root = "."
+runs_root = "runs"
+templates_root = "templates"
+interfaces_root = "interfaces"
+configs_root = "configs"
+
+[budget]
+wall_time_s = 7200
+max_parallel_agent_instances = 4
+max_parallel_a1_instances = 2
+max_parallel_a3_evaluations = 2
+max_parallel_synthesis_jobs = 2
+a3_cpu_budget = 4
+a3_memory_mb = 8192
+
+[filesystem]
+# 消息发布：写 tmp/*.partial → fsync → atomic rename
+atomic_write = true
+fsync_dir = true
+message_lease_s = 300
+recovery_scan_interval_s = 30
+
+[logging]
+level = "INFO"
+redact_secrets = true
+
+[model]
+# 只作为 fallback；主配置从 .env 读取
+timeout_s = 120
+max_retries = 3

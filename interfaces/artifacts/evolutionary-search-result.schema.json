@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/artifacts/evolutionary-search-result.schema.json",
+  "title": "Evolutionary Search Result",
+  "type": "object",
+  "required": [
+    "created_at",
+    "artifact_hash",
+    "generations",
+    "schema_version",
+    "workflow_id",
+    "experiment_id",
+    "producer_agent_instance_id"
+  ],
+  "properties": {
+    "workflow_id": {
+      "type": "string"
+    },
+    "workflow_round_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rtl_version_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "producer_agent_instance_id": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "artifact_hash": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "experiment_id": {
+      "type": "string"
+    },
+    "generations": {
+      "type": "array"
+    },
+    "elite": {
+      "type": "array"
+    },
+    "fallback_triggered": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": true
+}

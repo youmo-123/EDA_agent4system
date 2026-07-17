@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/workflow-state.schema.json",
+  "title": "Workflow State",
+  "type": "object",
+  "required": [
+    "entity_id",
+    "state",
+    "state_version"
+  ],
+  "properties": {
+    "entity_id": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "CREATED",
+        "RTL_REGISTERED",
+        "ACTIVE",
+        "REGRESSION",
+        "REPORTING",
+        "COMPLETED",
+        "FAILED",
+        "CANCELLED"
+      ]
+    },
+    "state_version": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": true
+}

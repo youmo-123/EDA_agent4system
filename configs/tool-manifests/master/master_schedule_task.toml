@@ -1,0 +1,13 @@
+tool_id = "master_schedule_task"
+interface_version = "1.0"
+implementation = "builtin"
+entrypoint = "dooragent.orchestration.scheduler:schedule_task"
+request_schema = "interfaces/tools/master/master-schedule-task.schema.json"
+result_schema = "interfaces/tools/common-result.schema.json"
+capabilities = ["scheduling"]
+required_env = []
+timeout_s = 30
+concurrency_limit = 1
+healthcheck = "dooragent.orchestration.scheduler:health"
+license_id = ""
+third_party_disclosure = "THIRD_PARTY.md"

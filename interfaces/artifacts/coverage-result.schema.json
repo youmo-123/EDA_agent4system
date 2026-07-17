@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/artifacts/coverage-result.schema.json",
+  "title": "Coverage Result",
+  "type": "object",
+  "required": [
+    "created_at",
+    "coverage_model_ref",
+    "artifact_hash",
+    "schema_version",
+    "workflow_id",
+    "metrics",
+    "producer_agent_instance_id"
+  ],
+  "properties": {
+    "workflow_id": {
+      "type": "string"
+    },
+    "workflow_round_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rtl_version_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "producer_agent_instance_id": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "artifact_hash": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "coverage_model_ref": {
+      "type": "string"
+    },
+    "test_batch_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "metrics": {
+      "type": "object"
+    },
+    "aggregate_metrics": {
+      "type": "object"
+    },
+    "structural_evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "functional_evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "a1_function_gate_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "report_hash": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

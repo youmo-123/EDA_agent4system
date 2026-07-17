@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dooragent.local/interfaces/master-agent-task.schema.json",
+  "title": "MASTER Agent Task",
+  "type": "object",
+  "required": [
+    "operation",
+    "agent_role"
+  ],
+  "properties": {
+    "operation": {
+      "type": "string",
+      "enum": [
+        "plan_workflow",
+        "route_task",
+        "review_evidence",
+        "resolve_gate",
+        "review_round",
+        "publish_report",
+        "health"
+      ]
+    },
+    "agent_role": {
+      "const": "MASTER"
+    }
+  },
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "$ref": "common-task.schema.json"
+    }
+  ]
+}
